@@ -1,0 +1,95 @@
+---
+title: "Exercise 2"
+author: "Juliana Theresse Gadayan"
+date: "2026-09-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r} 
+### Part A - Arithmetic Operations
+# TODO: Store 17 in a variable called a, and 5 in a variable called b
+
+a <- 17
+b <- 5
+
+print (a + b)
+print (a - b)
+print (a*b)
+print (a/b)
+
+```
+```{r}
+# TODO: Using the same a and b, compute and print a %% b and a %/% b
+
+a <- 17
+b <- 5
+
+print (a%%b)
+print (a%/%b)
+
+```
+```{r}
+# TODO: Print 2 raised to the power of 10 using the ^ operator
+
+print (2^10)
+
+```
+# Question #1: Run 17 / 5, 17 %% 5, and 17 %/% 5 side by side. In your own words, explain how these three results relate to each other mathematically.
+# Answer: They are related because it gives the same exact value but in different forms like decimal and whole numbers depends on the operation
+# Question #2: Predict the output of 10 %% 3 and 10 %/% 3 before running the code. Were you correct? If not, explain what you misunderstood.
+# Answer: My answer to 10%%3 is 1 and to 10%/%3 is 3.2. I am not correct because I thought that I should include the decimal in 10%/%3
+```{r}
+print (10%%3)
+print (10%/%3)
+```
+## Part B — Basic Data Types: typeof(), class(), and mode()
+```{r}
+# TODO: Use typeof() to check the type of each of x, y, z, w, v
+x <-  42
+y <- 42L        
+z <- "42"
+w <- TRUE
+v <- 3 + 2i 
+
+typeof(x)
+typeof(y)
+typeof(z)
+typeof(w)
+typeof(v)
+```
+```{r}
+# TODO: Use class() to check the class of each of x, y, z, w, v
+x <-  42
+y <- 42L        
+z <- "42"
+w <- TRUE
+v <- 3 + 2i 
+
+class(x)
+class(y)
+class(z)
+class(w)
+class(v)
+```
+```{r}
+# TODO: Use mode() to check the class of each of x, y, z, w, v
+x <-  42
+y <- 42L        
+z <- "42"
+w <- TRUE
+v <- 3 + 2i 
+
+mode(x)
+mode(y)
+mode(z)
+mode(w)
+mode(v)
+```
+# Question #3): x <- 42 and y <- 42L look almost identical, but typeof(x) and typeof(y) give different answers. Explain the difference in your own words.
+# Answer: The x <- 42 is the default numeric of r so it gives double
+  
+  
