@@ -1,0 +1,180 @@
+---
+title: "Rexercise 6"
+author: "Juliana Theresse T. Gadayan"
+date: "2026-11-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+## Part A. 
+# TODO: Create three vectors of equal length (5 students):
+# name (character): "Ana", "Ben", "Cid", "Dex", "Eli"
+# age (numeric): 20, 21, 19, 22, 20
+# passed (logical): TRUE, TRUE, FALSE, TRUE, FALSE
+name <- c("Ana", "Ben", "Cid", "Dex", "Eli")
+
+age <- c(20, 21, 19, 22, 20)
+
+passed <- c(TRUE, TRUE, FALSE, TRUE, FALSE)
+
+# TODO: Check the type of the "name" column using typeof(students$name)
+# and class(students$name)
+students <- data.frame(name, age, passed)
+typeof(students$name)
+class(students$name)
+```
+```{r}
+# TODO: Now create a SECOND data frame called courses directly, without
+# separate vectors first, using data.frame() with these columns:
+# course_code = c("IS101", "IS102", "IS103")
+# units = c(3, 3, 2)
+# instructor = c("Dr. P. Reyes", "Dr. R. Santos", "Dr. S. Cruz")
+courses <- data.frame(
+  course_code = c("IS101", "IS102", "IS103"),
+  units = c(3, 3, 2),
+  instructor = c("Dr. P. Reyes", "Dr. R. Santos", "Dr. S. Cruz")
+)
+
+print(courses)
+```
+```{r}
+# Question 1. You created students two different ways in concept: first from separate vectors, then courses directly inline. Both approaches produce the same kind of object. In your own words, explain why data.frame() requires every column argument to have the same length, and what error you would expect if they didn’t.
+# Answer: `data.frame()` requires all columns to have the same length so that each row contains complete and matching information. For example, if there are 5 students, each column should also have 5 values. If the columns have different lengths, R will show an error saying that the arguments have different numbers of rows.
+# Question 2. A data frame is often described as “a list of vectors of equal length.” Based on what you know about lists from a previous lab, explain why this description makes sense — specifically, why can each column hold a different data type while a single column cannot?
+# Answer: A data frame is like a list because each column can store a different type of data, such as names, ages, or TRUE/FALSE values. However, each column must have the same data type within it because it is a vector, and vectors in R can only hold one basic data type. This is why a data frame can contain different types of information while keeping each column consistent.
+
+## Part B. 
+# TODO: Access the "age" column of students three different ways:
+# students$age
+# students[["age"]]
+# students["age"]  -- note: compare the output/class of this one to the others
+
+# Using $
+students$age
+
+# Using double brackets
+students[["age"]]
+
+# Using single brackets
+students["age"]
+
+class(students$age)
+class(students[["age"]])
+class(students["age"])
+```
+```{r}
+# TODO: Access the entire 2nd row of students using students[2, ]
+# Access the entire second row
+students[2, ]
+```
+```{r}
+# TODO: Access the value in row 3, column "name" using students[3, "name"]
+students[3, "name"]
+```
+```{r}
+# TODO: Return only the rows of students where passed is TRUE
+# Hint: students[students$passed == TRUE, ]
+students[students$passed == TRUE, ]
+```
+```{r}
+# TODO: Return only the rows of students where passed is TRUE AND
+# age is greater than 19. Use the & operator to combine both conditions.
+students[students$passed == TRUE & students$age > 19, ]
+```
+```{r}
+# Question 3. students["age"] and students$age both seem to give you the age column, but class() reveals they are different types of objects. Run class() on each and explain the difference, connecting it to what you learned about single vs. double brackets on lists in a previous lab.
+class(students["age"])
+class(students$age)
+```
+```{r}
+# Question 4. In df-multiple-conditions, explain what the & operator is doing to the two logical vectors (students$passed == TRUE and students$age > 19) before that combined result is used to filter rows. What would change if you used | (OR) instead of & (AND)?
+# Answer: The `&` operator checks both conditions for each student and returns `TRUE` only when both are satisfied: the student passed and is older than 19. This combined logical result is then used to filter the rows. If I used `|` (OR) instead, a student would be included if they passed or were older than 19, even if only one condition was true.
+
+# Part C. 
+# TODO: Use str() on students to see the structure and types of each column
+str(students)
+```
+```{r}
+# TODO: Use dim(), nrow(), and ncol() on students to report its size
+dim(students)
+nrow(students)
+ncol(students)
+```
+```{r}
+# TODO: Use names() (or colnames()) to list the column names of students
+names(students)
+
+# Or
+colnames(students)
+```
+```{r}
+# TODO: Use summary() on students to get summary statistics for each column
+summary(students)
+```
+```{r}
+# Question 5. Run summary() on students. Notice that the numeric column (age) and the logical column (passed) are summarized very differently from the character column (name). Describe what kind of summary R produces for each of the three data types, and explain why a “mean” wouldn’t make sense for the name column.
+# Answer: For the `age` column, R shows numerical statistics such as the minimum, maximum, median, and mean. For the `passed` column, it counts how many values are TRUE and FALSE. For the `name` column, it simply lists the names and shows their frequency. A mean would not make sense for `name` because names are text, not numbers that can be added or averaged.
+# Question 6. str() and summary() both describe a data frame, but they show different information. Based on what you observed, when would str() be more useful to you than summary(), and vice versa?
+# Answer: I would use `str()` when I want to check the structure of a data frame, such as its columns, data types, and number of observations. On the other hand, I would use `summary()` when I want to understand the data better by looking at its basic statistics and value counts. In short, `str()` helps me see how the data is organized, while `summary()` helps me understand what the data contains.
+
+# Part D. 
+# TODO: Add a new column called year_level to students with values:
+# 2, 3, 1, 4, 2  (one per student, in the same order as the rows)
+students$year_level <- c(2, 3, 1, 4, 2)
+
+print(students)
+```
+```{r}
+# TODO: Remove the "passed" column from students by setting it to NULL
+# students$passed <- NULL
+students$passed <- NULL
+
+print(students)
+```
+```{r}
+# TODO: Sort students by age in ascending order using order()
+# Hint: students[order(students$age), ]
+students <- students[order(students$age), ]
+
+print(students)
+```
+```{r}
+# TODO: Sort students by age in DESCENDING order
+# Hint: use order(students$age, decreasing = TRUE), or order(-students$age)
+students <- students[order(students$age, decreasing = TRUE), ]
+
+print(students)
+```
+```{r}
+# Question 7. After removing the passed column, could you still run the filter from df-logical-filter (students$passed == TRUE)? Explain what happens and why keeping track of a data frame’s current structure matters as you apply a sequence of operations to it.
+# Answer: No, I could no longer run the filter because the `passed` column was already removed by setting `students$passed <- NULL`. R would return `NULL` for `students$passed`, so the filter would not work as expected. This shows why it is important to keep track of a data frame's current columns and structure, especially when performing several operations, to avoid errors or using data that no longer exists.
+# Question 8. order() does not sort the data frame directly — it returns a vector of row positions. Explain, step by step, how students[order(students$age), ] uses that position vector to reorder the whole data frame (all columns, not just age).
+# Answer: First, `order(students$age)` checks the ages and returns the row positions arranged from youngest to oldest. Then, `students[order(students$age), ]` uses those positions to rearrange the rows of the data frame. The blank space after the comma means all columns are included. This way, the entire row moves together, so the other information stays matched with the correct student.
+
+# Part E.
+# TODO: Add a new column "average" to grades that holds the mean of
+# midterm and final for each student. Hint: (grades$midterm + grades$final) / 2
+grades <- data.frame(
+  name = c("Ana", "Ben", "Cid", "Dex", "Eli"),
+  midterm = c(85, 78, 92, 88, 70),
+  final = c(90, 82, 95, 84, 75)
+)
+grades$average <- (grades$midterm + grades$final) / 2
+
+print(grades)
+```
+```{r}
+# TODO: Print only the rows of grades where remarks is "Failed",
+# showing just the name and average columns.
+# Hint: grades[grades$remarks == "Failed", c("name", "average")]
+grades[grades$remarks == "Failed", c("name", "average")]
+```
+```{r}
+# Question 9. Suppose your instructor wants to know: “Which factor seems more responsible for a student’s final remark — a big drop between midterm and final, or a consistently low midterm score?” Using only the tools from this lab (subsetting, new columns, sorting), describe — in plain language, code optional — the steps you would take with grades to start investigating that question.
+# Answer: I would first add a new column to `grades` showing the difference between each student's midterm and final scores. Then, I would sort the data to identify students with the biggest drops in their scores. I would also check students who had low midterm scores and compare their final remarks. By looking at both groups, I could see whether a big drop or a consistently low score seems more connected to receiving a failing remark.
+# Conclusion: A data frame is a table in R made up of rows and columns, where each column is a vector of the same length. It is similar to a list because each column can have a different data type, such as numbers, text, or logical values. Unlike a regular list, all columns must have the same number of elements to keep the rows aligned. It is commonly used for real-world data because it makes information easier to organize, manage, and analyze.
+```
+
