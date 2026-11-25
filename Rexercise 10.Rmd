@@ -1,9 +1,13 @@
 ---
-title: "Rexercise 10"
+title: "rexercise 10"
 author: "Juliana Theresse T. Gadayan"
 date: "2026-11-25"
 output: html_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -56,56 +60,3 @@ print(range_temp)
 
 
 ```
-```{r}
-## Question 3. 
-# a. Two loans have principals 1000 and 2000, rates 5% and 4%, and terms 2 and 3 years. Compute the final amount p * (1 + r)^n for each with mapply(). Then rewrite it so that the rate is a fixed 4.5% using MoreArgs.
-
-p <- c(1000, 2000)
-r <- c(0.05, 0.04)
-n <- c(2, 3)
-
-amount <- mapply(function(p, r, n) p * (1 + r)^n, p, r, n)
-print(amount)
-
-amount_fixed <- mapply(function(p, r, n) p * (1 + r)^n,
-                       p, n,
-                       MoreArgs = list(r = 0.045))
-print(amount_fixed)
-
-```
-```{r}
-## Question 4. 
-# a. Use iris dataset. (a) Mean Sepal.Length of iris for each species. (b) The number of cars in mtcars for every combination of cyl and am. (c) Mean mpg per cyl, ignoring missing values (add na.rm = TRUE)
-
-tapply(iris$Sepal.Length, iris$Species, mean)
-
-with(mtcars, table(cyl, am))
-
-tapply(mtcars$mpg, mtcars$cyl, mean, na.rm = TRUE)
-
-```
-```{r}
-## Part A. Debugging
-# Question 5. Each snippet has a mistake. Find it, explain it in one sentence and fix it.
-# a. sapply(list(a = 1:3, b = 4:6), mean())
-sapply(list(a = 1:3, b = 4:6), mean)
-# mean() is called without an argument, but sapply() expects a function to apply to each list element.
-# b. expected one mean per column of a 3 x 2 matrix, got three numbers apply(matrix(1:6, nrow = 3), 1, mean)
-apply(matrix(1:6, nrow = 3), 2, mean)
-# 1 applies the function to each row, but the question asks for the mean of each column.
-# c. wanted the class of each column  df <- data.frame(n = c(1, 2), s = c('a', 'b')) apply(df, 2, class)
-
-df <- data.frame(n = c(1, 2), s = c('a', 'b'))
-
-lapply(df, class)
-# apply() converts a data frame to a matrix, which can change the column data types.
-```
-```{r}
-## Question 6. 
-# a. Explain in your own words the difference between lapply() and sapply(). When would you choose vapply() instead?
-# `lapply()` and `sapply()` both apply a function to each element, but `lapply()` always returns a list while `sapply()` tries to simplify the result into a vector or matrix. I would use `vapply()` when I want to make sure the output has a specific type and size so the result is more consistent and predictable.
-# b. A colleague computes group means with lapply(split(x, g), mean). Which function gives the same result in one call, and what does it return?
-# The function `tapply()` gives the same result in one call by grouping the values in `x` according to `g` and calculating the mean of each group. It returns a named vector containing the mean for each group.
-
-```
-
